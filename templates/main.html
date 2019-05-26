@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <link href="../static/css/video-js.min.css" rel="stylesheet">
+    <script src="../static/js/video.min.js"></script>
+
+    <link href="../static/css/mystyle.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">待处理视频</h3>
+    </div>
+    <div class="panel-body">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <a href="#" class="thumbnail">
+                                <video height="100%" width="100%" controls>
+                                    <source src="" type="video/mp4">
+                                </video>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <form id="form1" method="post" enctype="multipart/form-data">
+                                <input name="video" type="file" class="add-actual-video">
+                            </form>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <button class="btn btn-primary add-video-btn" data-loading-text="Loading..." type="button">
+                                上传视频
+                            </button>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-sm-10 col-md-10 ">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                     aria-valuemax="100" style="width: 0%;">
+                                    <span class="sr-only">40% 完成</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <a href="#" class="thumbnail">
+                                <video height="100%" width="100%" controls>
+                                    <source src="" type="video/mp4">
+                                </video>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <form id="form2" method="post" enctype="multipart/form-data">
+                                <input name="video" type="file" class="add-actual-video">
+                            </form>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <button class="btn btn-primary add-video-btn" data-loading-text="Loading..." type="button">
+                                上传视频
+                            </button>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-10 col-md-10 ">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                     aria-valuemax="100" style="width: 0%;">
+                                    <span class="sr-only">40% 完成</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br/>
+
+
+            <div class="row">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4"></div>
+                    <div class="col-sm-4 col-md-4">
+{#                        <video width="80%" height="80%" controls>#}
+{#                            <source src="" type="video/mp4">#}
+{#                        </video>#}
+                    </div>
+                    <div class="col-sm-4 col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3"></div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6"><input name="video" type="file" class=""></div>
+                            <div class="col-sm-6 col-md-6">
+                                <form id="form3" method="post" enctype="multipart/form-data"></form>
+                            </div>
+                            <button class="btn btn-primary add-video-btn" data-loading-text="Loading..." type="button">
+                                上传音频
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3"></div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3"></div>
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 0%;">
+                                <span class="sr-only">40% 完成</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 两个输入视频 -->
+
+<!-- 音频部分 -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">输出区域</h3>
+    </div>
+    <div class="panel-body">
+        <div class="container">
+            <div class="row">
+                 <div class="col-sm-4 col-md-4"></div>
+                 <div class="col-sm-4 col-md-4">
+                     <video height="100%" width="100%" controls>
+                                    <source src="" type="video/mp4">
+                                </video>
+                 </div>
+                 <div class="col-sm-4 col-md-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-2 col-md-2">
+                    <button id="merge_start_btn" class="btn btn-primary" data-loading-text="Loading..." type="button">
+                        开始合成
+                    </button>
+
+                </div>
+                <div class="col-sm-2 col-md-2">
+                     <button  class="btn btn-primary" data-loading-text="Loading..." type="button">
+                        下载视频
+                    </button>
+                </div>
+                <div class="col-sm-4 col-md-4">
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                 <div class="col-sm-4 col-md-4"></div>
+                 <div class="col-sm-4 col-md-4 ">
+                     <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                         aria-valuemax="100" style="width: 0%;">
+                        <span class="sr-only">40% 完成</span>
+                    </div>
+                     </div>
+                </div>
+                 <div class="col-sm-4 col-md-4"></div>
+            </div>
+            <div class="row">
+                <!-- {#                    <video width="320" height="240" controls>#}
+                    {#                        <source src="../static/video/Main.mp4" type="video/mp4">#}
+                    {#                    </video>#} -->
+            </div>
+            <!-- 进度条部分 -->
+
+        </div>
+    </div>
+</div>
+<!-- 输出视频 -->
+<div>
+
+</div>
+</body>
+
+</html>
+<script>
+    var progress_active;
+    $(".add-video-btn").click(function () {
+        //求前端大佬帮忙优化下面的蠢代码
+        var formData = new FormData($(this).parent().prev().children()[0])
+        btn_active = $(this)
+        progress_active = btn_active.parent().parent().parent().find(".progress-bar")
+
+
+        $(this).html("Loading....")
+        $.ajax({
+            url: "/add_video",
+            type: "POST",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            xhr: function () {
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { //检查upload属性是否存在
+                    //绑定progress事件的回调函数
+                    myXhr.upload.addEventListener('progress', progressHandlingFunction, false);
+                }
+                return myXhr; //xhr对象返回给jQuery使用
+            },
+            success: function (data) {
+                btn_active.html("上传视频")
+                progress_active.css("width", "0%")
+            }
+        })
+    });
+
+    $("#merge_start_btn").click(function () {
+        var data = {
+            "video1":$(":file")[0].files[0].name,
+            "video2":$(":file")[1].files[0].name
+        }
+
+        $.ajax({
+            url: "/merge_video",
+            type: "POST",
+            data: JSON.stringify(data),
+            cache: false,
+            processData: false,
+            contentType: "application/json",
+            success: function (data) {
+               alert("合成成功")
+            }
+        })
+
+
+    })
+
+    $(':file').change(function () {
+        video_avtive = $(this).parent().parent().parent().parent().find("video")
+        var totalSize = 0;
+        var file = this.files[0]; //假设file标签没打开multiple属性，那么只取第一个文件就行了
+        var name = file.name;
+        size = file.size;
+        type = file.type;
+        url = window.URL.createObjectURL(file); //获取本地文件的url，如果是图片文件，可用于预览图片
+
+        video_avtive.attr("src", url);
+
+
+    });
+
+    function progressHandlingFunction(e) {
+        if (e.lengthComputable) {
+            var percent = e.loaded / e.total * 100
+            progress_active.css("width", percent + "%"); //更新数据到进度条
+
+
+        }
+    }
+
+
+</script>
