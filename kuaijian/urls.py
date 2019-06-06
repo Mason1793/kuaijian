@@ -19,7 +19,10 @@ from django.conf.urls import url
 from . import view
 urlpatterns = [
     url('hello/', view.hello),
-    url('main',view.main),
+    url('main', view.main),
     url('add_video', view.add_video),
-    url('merge_video', view.merge_video)
+    url('add_sound', view.add_sound),
+    url('merge_video', view.merge_video),
+    url('download', view.download),
+    url('ckplayer', view.ckplayer)
 ]
