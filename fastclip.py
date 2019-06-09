@@ -7,6 +7,10 @@ import os
 from utils import detect_image_4_results, get_classes
 from model.yolo_model import YOLO
 
+global yolo_model, classes_file, all_classes
+yolo_model = None
+classes_file = None
+all_classes = None
 
 def synthetize_Video_Mp3(video, voice, output):
     cmd = "ffmpeg -y -i " + voice + " -i " + video + " -vcodec h264 " + output
@@ -166,9 +170,11 @@ def processing_YOLOv3(main_view_videocap, whole_view_videocap, output_videowrite
     left_length = length
 
     # Initialize YOLOv3
-    yolo_model = YOLO(yolo_object_threshold, yolo_nms_threshold)
-    classes_file = 'data/coco_classes.txt'
-    all_classes = get_classes(classes_file)
+    global yolo_model, classes_file, all_classes
+    if yolo_model == None:
+        yolo_model = YOLO(yolo_object_threshold, yolo_nms_threshold)
+        classes_file = 'data/coco_classes.txt'
+        all_classes = get_classes(classes_file)
 
     #################################### stage 0 ####################################
     # Start: Output whole view 10s
@@ -240,15 +246,18 @@ def processing_YOLOv3(main_view_videocap, whole_view_videocap, output_videowrite
 
     tail_length = 10
     while left_length > fps * tail_length:
+
+        random_length_main = random.randrange(5 * fps, 10 * fps, fps)
+        random_length_whole = random.randrange(10 * fps, 20 * fps, fps)
         
         # if left whole video is too short
-        if left_length <= fps * tail_length + fps * 5:
+        if left_length <= fps * tail_length + random_length_main:
             break
 
         print("Main begin:")
         # main view
         main_view_count = 0
-        while main_view_count < fps * 8 and left_length > fps * tail_length:
+        while main_view_count < random_length_main and left_length > fps * tail_length:
             
             # output
             output_videowriter.write(frame_main_0)
@@ -284,7 +293,7 @@ def processing_YOLOv3(main_view_videocap, whole_view_videocap, output_videowrite
             print(total_processed_frame_count)
             print("Main\n")
 
-            if main_view_count > fps * 5 and main_view_has_person_state == False:
+            if main_view_count >= fps * 5 and main_view_has_person_state == False:
                 break
 
         # whole view
@@ -326,7 +335,7 @@ def processing_YOLOv3(main_view_videocap, whole_view_videocap, output_videowrite
             print(total_processed_frame_count)
             print("Whole\n")
 
-            if whole_view_count > fps * 8 and main_view_has_person_state == True:
+            if whole_view_count > random_length_whole and main_view_has_person_state == True:
                 break
 
 

@@ -1,0 +1,9 @@
+__pycache__/
+cfg/
+data/
+db.sqlite3
+kuaijian/__pycache__/
+model/
+static/output/
+static/sound/
+static/upload/

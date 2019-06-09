@@ -60,13 +60,14 @@ def merge_video(request):
     output_file = time_stamp + ".mp4"
 
     sound = data.get('sound')
+    sound_path = os.path.join('static', 'sound', sound)
     print(file_path1)
     print(file_path2)
     if(sound != None):
         output_path = os.path.join(base_dir, 'static', 'output', 'temp.mp4')
         FastClip(file_path1, file_path2, output_path)
         output_path1 = os.path.join(base_dir, 'static', 'output', output_file)
-        synthetize_Video_Mp3(output_path, sound, output_path1)
+        synthetize_Video_Mp3(output_path, sound_path, output_path1)
     else:
         output_path = os.path.join(base_dir, 'static', 'output', 'temp.mp4')
         FastClip(file_path1, file_path2, output_path)
