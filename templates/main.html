@@ -194,11 +194,11 @@
 <script>
     // var progress_active;
     $(".add-sound-btn").click(function () {
-        postFile(this,'/kuaijian/add_sound','上传音频');
+        postFile(this,'/add_sound','上传音频');
     });
 
     $(".add-video-btn").click(function () {
-        postFile(this,'/kuaijian/add_video','上传视频');
+        postFile(this,'/add_video','上传视频');
     });
 
     $("#merge_start_btn").click(function () {
@@ -248,8 +248,6 @@
         url = window.URL.createObjectURL(file); //获取本地文件的url，如果是图片文件，可用于预览图片
 
         video_avtive.attr("src", url);
-
-
     });
 
     // function progressHandlingFunction(e) {
@@ -271,7 +269,8 @@
         var btn_active = $(_this);
         var progress_active = btn_active.parent().parent().parent().find(".progress-bar");
 
-        $(_this).html("Loading....")
+        $(_this).html("Loading....");
+        $(_this).attr('disabled','disabled');
         $.ajax({
             url: url,
             type: "POST",
@@ -287,12 +286,12 @@
                         if (e.lengthComputable) {
                             var percent = e.loaded / e.total * 100
                             progress_active.css("width", percent + "%"); //更新数据到进度条
-                            progress_active.find('.sr-only').html(percent + "%"); //更新数据到进度条
+                            progress_active.find('.sr-only').html(percent.toFixed(2) + "%"); //更新数据到进度条
 
                             if(parseInt(percent) == 100) {
                                 btn_active.html('上传完毕');
                                 btn_active.addClass('btn-warning');
-                                btn_active.attr('disabled','disabled');
+                                
                                 progress_active.addClass('progress-bar-warning');
                             }
                         }
@@ -301,7 +300,8 @@
                 return myXhr; //xhr对象返回给jQuery使用
             },
             success: function (data) {
-                btn_active.html(html);
+                // btn_active.html(html);
+                btn_active.addClass('btn-warning');
             },
             error: function (data) {
                 btn_active.html('操作失败');
@@ -313,5 +313,3 @@
         
     }
 
-
-</script>
