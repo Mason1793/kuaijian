@@ -77,7 +77,7 @@
                             </form>
                         </div>
                         <div class="col-sm-6 col-md-6">
-                            <button class="btn btn-primary add-video-btn" data-loading-text="Loading..." type="button">
+                            <button class="btn btn-primary add-video-btn" data-loading-text="Loading..." type="button" disabled="false">
                                 上传视频
                             </button>
                         </div>
@@ -224,6 +224,7 @@
     $(".add-video-btn").click(function () {
         //求前端大佬帮忙优化下面的蠢代码
         var formData = new FormData($(this).parent().prev().children()[0])
+        console.log($(this).parent().prev().children()[0]);
         btn_active = $(this)
         progress_active = btn_active.parent().parent().parent().find(".progress-bar")
 
@@ -306,7 +307,9 @@
             var percent = e.loaded / e.total * 100
             progress_active.css("width", percent + "%"); //更新数据到进度条
 
-
+            if(parseInt(percent) == 100) {
+                $('.add-video-btn').removeAttr('disabled');
+            }
         }
     }
 
