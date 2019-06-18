@@ -192,62 +192,13 @@
 
 </html>
 <script>
-    var progress_active;
+    // var progress_active;
     $(".add-sound-btn").click(function () {
-        //求前端大佬帮忙优化下面的蠢代码
-        var formData = new FormData($(this).parent().prev().children()[0])
-        btn_active = $(this)
-        progress_active = btn_active.parent().parent().parent().find(".progress-bar")
-
-        $(this).html("Loading....")
-        $.ajax({
-            url: "/add_sound",
-            type: "POST",
-            data: formData,
-            cache: false,
-            processData: false,
-            contentType: false,
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) { //检查upload属性是否存在
-                    //绑定progress事件的回调函数
-                    myXhr.upload.addEventListener('progress', progressHandlingFunction, false);
-                }
-                return myXhr; //xhr对象返回给jQuery使用
-            },
-            success: function (data) {
-                btn_active.html("上传音频")
-            }
-        })
+        postFile(this,'/add_sound','上传音频');
     });
 
     $(".add-video-btn").click(function () {
-        //求前端大佬帮忙优化下面的蠢代码
-        var formData = new FormData($(this).parent().prev().children()[0])
-        btn_active = $(this)
-        progress_active = btn_active.parent().parent().parent().find(".progress-bar")
-
-
-        $(this).html("Loading....")
-        $.ajax({
-            url: "/add_video",
-            type: "POST",
-            data: formData,
-            cache: false,
-            processData: false,
-            contentType: false,
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) { //检查upload属性是否存在
-                    //绑定progress事件的回调函数
-                    myXhr.upload.addEventListener('progress', progressHandlingFunction, false);
-                }
-                return myXhr; //xhr对象返回给jQuery使用
-            },
-            success: function (data) {
-                btn_active.html("上传视频")
-            }
-        })
+        postFile(this,'/add_video','上传视频');
     });
 
     $("#merge_start_btn").click(function () {
@@ -301,13 +252,55 @@
 
     });
 
-    function progressHandlingFunction(e) {
-        if (e.lengthComputable) {
-            var percent = e.loaded / e.total * 100
-            progress_active.css("width", percent + "%"); //更新数据到进度条
+    // function progressHandlingFunction(e) {
+    //     if (e.lengthComputable) {
+    //         var percent = e.loaded / e.total * 100
+    //         progress_active.css("width", percent + "%"); //更新数据到进度条
 
+    //         console.log(percent);
+    //         if(parseInt(percent) == 100) {
+    //             console.log(percent);
+    //             $('.btn').removeAttr('disabled');
+    //         }
+    //     }
+    // }
 
-        }
+    function postFile(_this,url,html){
+        //求前端大佬帮忙优化下面的蠢代码
+        var formData = new FormData($(_this).parent().prev().children()[0]);
+        var btn_active = $(_this);
+        var progress_active = btn_active.parent().parent().parent().find(".progress-bar");
+
+        $(_this).html("Loading....")
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            xhr: function () {
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { //检查upload属性是否存在
+                    //绑定progress事件的回调函数
+                    myXhr.upload.addEventListener('progress', function(e) {
+                        if (e.lengthComputable) {
+                            var percent = e.loaded / e.total * 100
+                            progress_active.css("width", percent + "%"); //更新数据到进度条
+
+                            if(parseInt(percent) == 100) {
+                                $('.btn').next().removeAttr('disabled');
+                            }
+                        }
+                    }, false);
+                }
+                return myXhr; //xhr对象返回给jQuery使用
+            },
+            success: function (data) {
+                btn_active.html(html);
+            }
+        })
+        
     }
 
 
