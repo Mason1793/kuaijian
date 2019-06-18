@@ -60,7 +60,8 @@ def merge_video(request):
     output_file = time_stamp + ".mp4"
 
     sound = data.get('sound')
-    sound_path = os.path.join('static', 'sound', sound)
+    if sound != None:
+        sound_path = os.path.join('static', 'sound', sound)
     print(file_path1)
     print(file_path2)
     if(sound != None):
