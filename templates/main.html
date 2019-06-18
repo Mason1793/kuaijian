@@ -288,20 +288,21 @@
                             progress_active.css("width", percent + "%"); //更新数据到进度条
                             progress_active.find('.sr-only').html(percent.toFixed(2) + "%"); //更新数据到进度条
 
-                            if(parseInt(percent) == 100) {
-                                btn_active.html('上传完毕');
-                                btn_active.addClass('btn-warning');
+                            // if(parseInt(percent) == 100) {
+                            //     btn_active.html('上传完毕');
+                            //     btn_active.addClass('btn-warning');
                                 
-                                progress_active.addClass('progress-bar-warning');
-                            }
+                            //     progress_active.addClass('progress-bar-warning');
+                            // }
                         }
                     }, false);
                 }
                 return myXhr; //xhr对象返回给jQuery使用
             },
             success: function (data) {
-                // btn_active.html(html);
+                btn_active.html('上传完毕');
                 btn_active.addClass('btn-warning');
+                progress_active.addClass('progress-bar-warning');
             },
             error: function (data) {
                 btn_active.html('操作失败');
@@ -313,3 +314,5 @@
         
     }
 
+
+</script>
