@@ -8,7 +8,7 @@
     <link href="../static/css/video-js.min.css" rel="stylesheet">
     <script src="../static/js/video.min.js"></script>
 
-    <link href="../static/css/mystyle.css">
+    <link href="../static/css/mystyle.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -52,7 +52,7 @@
                             <div class="progress progress-striped active">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                                      aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">40% 完成</span>
+                                    <span class="sr-only"></span>
                                 </div>
 
                             </div>
@@ -88,7 +88,7 @@
                             <div class="progress progress-striped active">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                                      aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">40% 完成</span>
+                                    <span class="sr-only"></span>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                             <div class="progress progress-striped active">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                                      aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">40% 完成</span>
+                                    <span class="sr-only"></span>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
                 <div class="col-sm-4 col-md-4"></div>
                 <div class="col-sm-4 col-md-4">
                     <video id="output_video" height="100%" width="100%" controls>
-                        <source src="../static/output/mymovie.mp4" type="video/mp4">
+                        <source src="" type="video/mp4">
                     </video>
                 </div>
                 <div class="col-sm-4 col-md-4"></div>
@@ -173,7 +173,7 @@
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                              aria-valuemax="100" style="width: 0%;">
-                            <span class="sr-only">40% 完成</span>
+                            <span class="sr-only"></span>
                         </div>
                     </div>
                 </div>
@@ -287,9 +287,13 @@
                         if (e.lengthComputable) {
                             var percent = e.loaded / e.total * 100
                             progress_active.css("width", percent + "%"); //更新数据到进度条
-
+                            progress_active.find('.sr-only').html(percent + "%"); //更新数据到进度条
+                            console.log(e);
+                            console.log(e.total);
+                            console.log(percent);
                             if(parseInt(percent) == 100) {
-                                $('.btn').next().removeAttr('disabled');
+                                btn_active.html('上传完毕');
+                                btn_active.attr('disabled','disabled');
                             }
                         }
                     }, false);
@@ -298,6 +302,11 @@
             },
             success: function (data) {
                 btn_active.html(html);
+            },
+            error: function (data) {
+                // btn_active.html('操作失败');
+                // btn_active.addClass('btn-danger');
+                // progress_active.css("width", 0 + "%");
             }
         })
         

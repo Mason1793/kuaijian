@@ -42,3 +42,12 @@ html {
 *, ::after, ::before {
     box-sizing: inherit;
 }
+
+.progress-bar .sr-only {
+    margin-left: -10px;
+    overflow: visible;
+    clip: auto;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+}
