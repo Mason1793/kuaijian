@@ -194,11 +194,11 @@
 <script>
     // var progress_active;
     $(".add-sound-btn").click(function () {
-        postFile(this,'/add_sound','上传音频');
+        postFile(this,'/kuaijian/add_sound','上传音频');
     });
 
     $(".add-video-btn").click(function () {
-        postFile(this,'/add_video','上传视频');
+        postFile(this,'/kuaijian/add_video','上传视频');
     });
 
     $("#merge_start_btn").click(function () {
@@ -288,12 +288,12 @@
                             var percent = e.loaded / e.total * 100
                             progress_active.css("width", percent + "%"); //更新数据到进度条
                             progress_active.find('.sr-only').html(percent + "%"); //更新数据到进度条
-                            console.log(e);
-                            console.log(e.total);
-                            console.log(percent);
+
                             if(parseInt(percent) == 100) {
                                 btn_active.html('上传完毕');
+                                btn_active.addClass('btn-warning');
                                 btn_active.attr('disabled','disabled');
+                                progress_active.addClass('progress-bar-warning');
                             }
                         }
                     }, false);
@@ -304,9 +304,10 @@
                 btn_active.html(html);
             },
             error: function (data) {
-                // btn_active.html('操作失败');
-                // btn_active.addClass('btn-danger');
-                // progress_active.css("width", 0 + "%");
+                btn_active.html('操作失败');
+                btn_active.addClass('btn-danger');
+                progress_active.css("width", 0 + "%");
+                progress_active.find('.sr-only').html(' ');
             }
         })
         
