@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <title>快剪</title>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
-    <link href="../static/css/video-js.min.css" rel="stylesheet">
-    <script src="../static/js/video.min.js"></script>
+    <link href="/kuaijian/static/css/video-js.min.css" rel="stylesheet">
+    <script src="/kuaijian/static/js/video.min.js"></script>
 
-    <link href="../static/css/mystyle.css?v1" rel="stylesheet">
+    <link href="/kuaijian/static/css/mystyle.css?v1" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -194,11 +194,11 @@
 <script>
     // var progress_active;
     $(".add-sound-btn").click(function () {
-        postFile(this,'/add_sound','上传音频');
+        postFile(this,'/kuaijian/add_sound','上传音频');
     });
 
     $(".add-video-btn").click(function () {
-        postFile(this,'/add_video','上传视频');
+        postFile(this,'/kuaijian/add_video','上传视频');
     });
 
     $("#merge_start_btn").click(function () {
@@ -218,19 +218,19 @@
 
 
         $.ajax({
-            url: "/merge_video",
+            url: "/kuaijian/merge_video",
             type: "POST",
             data: JSON.stringify(data),
             cache: false,
             processData: false,
             contentType: "application/json",
-            timeout: 36000000,
+            timeout: 0,
             success: function (data) {
                 console.log("合成成功")
                 console.log(data)
 
                 $("#output_video").attr("src", "../static/output/" + data.output_file);
-                $("#download").attr("href", "/download?file=" + data.output_file);
+                $("#download").attr("href", "/kuaijian/download?file=" + data.output_file);
             }
         })
     })

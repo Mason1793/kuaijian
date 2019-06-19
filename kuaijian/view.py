@@ -75,7 +75,6 @@ def merge_video(request):
         output_path1 = os.path.join(base_dir, 'static', 'output', output_file)
         convert_2_h264(output_path, output_path1)
 
-    # output_file ="mymovie.mp4"
     return JsonResponse({"msg": "merge success", "output_file": output_file})
 
 
