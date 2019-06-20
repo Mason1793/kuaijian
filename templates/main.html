@@ -258,6 +258,9 @@ html {
     });
 
     $("#merge_start_btn").click(function () {
+        $('#merge_start_btn').attr('disabled','disabled');
+        $('#merge_start_btn').html('合成中…');
+
         var data;
         if ($(":file")[2].files[0] == null) {
             data = {
@@ -280,14 +283,13 @@ html {
             cache: false,
             processData: false,
             contentType: "application/json",
-            timeout: 0,
-            success: function (data) {
-                console.log("合成成功")
-                console.log(data)
+            // success: function (data) {
+            //     console.log("合成成功")
+            //     console.log(data)
 
-                // $("#output_video").attr("src", "../static/output/" + data.output_file);
-                // $("#download").attr("href", "/kuaijian/download?file=" + data.output_file);
-            }
+            //     // $("#output_video").attr("src", "../static/output/" + data.output_file);
+            //     // $("#download").attr("href", "/kuaijian/download?file=" + data.output_file);
+            // }
         })
 
         // 定时器 请求接口判断是否合成成功
@@ -309,14 +311,12 @@ html {
                         $("#output_video").attr("src", "../static/output/" + data.output_file_name);
                         $("#download").attr("href", "/kuaijian/download?file=" + data.output_file_name);
                         $('#download .btn').removeAttr('disabled');
-                    } else {
-                        $('#merge_start_btn').attr('disabled');
-                        $('#merge_start_btn').html('合成中…');
                     }
                 }
 
             })
-        },5000);
+        },
+        10000); //query duration
 
 
     })

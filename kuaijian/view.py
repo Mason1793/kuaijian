@@ -27,7 +27,6 @@ def main(request):
 
 # 没有心情优化下面两个函数
 def add_sound(request):
-    print('add_sound')
     sound_obj = request.FILES.get('sound')
 
     file_path = os.path.join('static', 'sound', sound_obj.name)
