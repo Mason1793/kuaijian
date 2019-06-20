@@ -6,6 +6,7 @@ import os
 import time
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
+global finished_tag, output_file_name
 
 def hello(request):
     context = {}
@@ -46,6 +47,9 @@ def add_video(request):
 
 
 def merge_video(request):
+    global finished_tag, output_file_name
+    finished_tag = False
+
     base_dir = os.getcwd()
     print ("merge_video:"+base_dir)
 
@@ -75,7 +79,17 @@ def merge_video(request):
         output_path1 = os.path.join(base_dir, 'static', 'output', output_file)
         convert_2_h264(output_path, output_path1)
 
+    finished_tag = True
+    output_file_name = output_file
     return JsonResponse({"msg": "merge success", "output_file": output_file})
+
+
+def query_finished_tag(request):
+    global finished_tag, output_file_name
+    if finished_tag:
+        return JsonResponse({"msg":"finished", "output_file_name":output_file_name})
+    else:
+        return JsonResponse({"msg":"not finished"})
 
 
 def download(request):
