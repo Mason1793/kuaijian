@@ -24,6 +24,7 @@ urlpatterns = [
     url('add_sound', view.add_sound),
     url('merge_video', view.merge_video),
     url('download', view.download),
+    url('query_finished_tag', view.query_finished_tag),
     url('ckplayer', view.ckplayer),
     url('^$', view.main),
 ]

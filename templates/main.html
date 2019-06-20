@@ -212,7 +212,7 @@ html {
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <a id="download" href="#">
-                        <button class="btn btn-primary" data-loading-text="Loading..." type="button">
+                        <button class="btn btn-primary" data-loading-text="Loading..." type="button" disabled>
                             下载视频
                         </button>
                     </a>
@@ -285,15 +285,45 @@ html {
                 console.log("合成成功")
                 console.log(data)
 
-                $("#output_video").attr("src", "../static/output/" + data.output_file);
-                $("#download").attr("href", "/kuaijian/download?file=" + data.output_file);
+                // $("#output_video").attr("src", "../static/output/" + data.output_file);
+                // $("#download").attr("href", "/kuaijian/download?file=" + data.output_file);
             }
         })
+
+        // 定时器 请求接口判断是否合成成功
+        var outputInterval = setInterval(function(){
+            $.ajax({
+                url: "/kuaijian/query_finished_tag",
+                type: "POST",
+                data: JSON.stringify(data),
+                cache: false,
+                processData: false,
+                contentType: "application/json",
+                success: function (data) {
+                    // 控制台打印接口返回json
+                    console.log(data);
+                    // code=1,合成成功
+                    if(data && data.code == 1) {
+                        clearInterval(outputInterval);
+                        $('#merge_start_btn').html('合成完毕');
+                        $("#output_video").attr("src", "../static/output/" + data.output_file_name);
+                        $("#download").attr("href", "/kuaijian/download?file=" + data.output_file_name);
+                        $('#download .btn').removeAttr('disabled');
+                    } else {
+                        $('#merge_start_btn').attr('disabled');
+                        $('#merge_start_btn').html('合成中…');
+                    }
+                }
+
+            })
+        },5000);
+
+
     })
 
-    $("#download").click(function () {
+    // $("#download").click(function () {
 
-    })
+    // })
 
     $(':file').change(function () {
         video_avtive = $(this).parent().parent().parent().parent().find("video")

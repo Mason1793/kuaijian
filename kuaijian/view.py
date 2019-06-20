@@ -6,7 +6,10 @@ import os
 import time
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-global finished_tag, output_file_name
+global finished_tag
+global output_file_name
+finished_tag = False
+output_file_name = None
 
 def hello(request):
     context = {}
@@ -87,9 +90,9 @@ def merge_video(request):
 def query_finished_tag(request):
     global finished_tag, output_file_name
     if finished_tag:
-        return JsonResponse({"msg":"finished", "output_file_name":output_file_name})
+        return JsonResponse({"code":1, "msg":"finished", "output_file_name":output_file_name})
     else:
-        return JsonResponse({"msg":"not finished"})
+        return JsonResponse({"code":0, "msg":"not finished"})
 
 
 def download(request):
